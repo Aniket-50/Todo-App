@@ -1,9 +1,27 @@
 .col{
   margin: 2px;
-  padding: 3px;
-  
+  padding:  0px 15px;
+  border-radius: 10px;
+  font-size: 80%;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+.col input{
+  width: 60%;
+  height: 90%;
+  font-size: 120%;
+  border-radius: 10px;
+}
+.add{
+  background-color: #198754;
+  text-align: center;
+  width: auto;
+}
+
 .row{
-  margin: 3px;
-  text-align: left;
+  width: 15in;
+  background-color: blueviolet;
+ display: flex;
+ text-align:left ;
+ border-radius: 30px;
+margin-left: 3px;
 }

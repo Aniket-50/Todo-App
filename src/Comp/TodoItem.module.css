@@ -1,9 +1,20 @@
 .col{
+  padding:  10px 10px;
+  color: #000;
+
+  font-size: 120%;
+  font-family:Arial, Helvetica, sans-serif
+}
+.add{
+  text-align: center;
   margin: 2px;
-  padding: 3px;
-  
+  width: auto;
 }
 .row{
-  margin: 3px;
+  background-color:dodgerblue;
+   padding-left: 10px;
+  width: 15in;
+  border-radius: 30px;
+  margin-top: 5px;
   text-align: left;
 }

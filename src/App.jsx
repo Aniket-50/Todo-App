@@ -1,22 +1,26 @@
-
-import AppName from './Comp/AppName';
 import AddTodo from './Comp/AddTodo';
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 import TodoItems from './Comp/TodoItems';
-import { useEffect, useReducer, useState } from 'react';
-import TaskFinished from './Comp/TaskFinished';
+import { useEffect, useReducer} from 'react';
 import {TodoStore} from './store/TodoStore';
 
 
 const todoItemsReducer=(CurrTodoItems,action)=>{
   let newTodoItem=CurrTodoItems;
   if(action.type=="NEW-ITEM"){
-    newTodoItem=[...CurrTodoItems,{name:action.payload.todoItem,todoDate:action.payload.todoDate}]  
+    newTodoItem=[...CurrTodoItems,{id:action.payload.id,name:action.payload.todoItem,todoDate:action.payload.todoDate}]  
 }
 else if(action.type=="DEL-ITEM"){
+  newTodoItem=CurrTodoItems.filter(item=>item.id!=action
+    .payload.id)
+}
+else if(action.type=="edit"){
   newTodoItem=CurrTodoItems.filter(item=>item.name!=action
-    .payload.todoItem)
+    .payload.oldItem)
+    CurrTodoItems=newTodoItem;
+    newTodoItem=[...newTodoItem,{id:action.payload.id,name:action.payload.newitem,todoDate:action.payload.todoDate}]
+
 }
 return newTodoItem;
 }
@@ -38,42 +42,48 @@ const addNewItem=(todoItem,todoDate)=>{
   const newItemAction={
     type:"NEW-ITEM",
     payload:{
+      id:todoItems.length+1,
       todoItem,
       todoDate
     }
   };
-  dispatchTodoItem(newItemAction);
-  
+  dispatchTodoItem(newItemAction); 
 }
-
-const DeleteItem=(todoItem)=>{
- 
+const DeleteItem=(id)=>{
   const DelAction={
     type:"DEL-ITEM",
     payload:{
-      todoItem
+      id
     }
   };
   dispatchTodoItem(DelAction);
 }
+const editItem=(newitem,oldItem,todoDate,id)=>{
+  const editAction={
+    type:"edit",
+    payload:{
+      id,
+      newitem,
+      oldItem,
+      todoDate
+    }
 
-//const [todoItems,setTodoItem]=useState(initialTodoItem);
-
+  };
+  dispatchTodoItem(editAction)
+}
+console.log(todoItems)
   return (
     <>
-    <TodoStore.Provider value={{todoItems,addNewItem,DeleteItem}}>
+    <TodoStore.Provider value={{todoItems,editItem,addNewItem,DeleteItem}}>
      <center className="todo-container">
-      <AppName/>
+     <h1> Todo App</h1>
       <div className="items-container">
       <AddTodo onNewItem={addNewItem}/>
-      <TaskFinished/>
+      {todoItems.length==0 && <h1> All task Finshed</h1>}
         <TodoItems todoItems={todoItems} onDelClick={DeleteItem}/>
       </div>
      </center>
      </TodoStore.Provider>
-
-     
-  
     </>
   )
 }

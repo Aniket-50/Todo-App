@@ -18,31 +18,29 @@ function AddTodo(){
   }
   const HandleButtonClicked=(event)=>{
     event.preventDefault();
-    const TodoName=TodoNameRef.current.value;
-    const todoDate=TodoDateRef.current.value;
+  setTodoName(TodoNameRef.current.value);
+    setTodoDate(TodoDateRef.current.value);
     addNewItem(TodoName,todoDate);
- setTodoDate();
+ setTodoDate("");
  setTodoName("");
   }
   return <>
   <div className="items-container">
-  <form className={`${styles.row} row`}  onSubmit={HandleButtonClicked}>
-    <div className={`${styles.col} col-4`}> <input type ="text" placeholder="kya karna h"
+  <form className={`${styles.row}`}  onSubmit={HandleButtonClicked}>
+    <div className={`${styles.col} col-3`}>  <input type ="text" placeholder="kya karna h"
      onChange={HandleNameChange}
      ref={TodoNameRef}
-      value={TodoName}>
+      value={TodoName} required>
         </input>
         </div>
-  <div className={`${styles.col} col-4`}>
+  <div className={`${styles.col} col-3`}>
     <input type="date"
      onChange={HandleDateChange} 
      ref={TodoDateRef}></input>
      </div>
-   <div className={`${styles.col} col-2`}> 
-   <button className="btn btn-success">
-    <IoMdAdd />
+   <button className={`${styles.add} btn btn-success`}> 
+    {"Add"}<IoMdAdd />
     </button>
-    </div>
    </form>
     </div>
   </>
