@@ -5,9 +5,9 @@ function TodoItems({}){
  const {todoItems} =useContext(TodoStore);
  
   return <>
-  <div className="items-container">
+  <div >
     {todoItems.map(item=> 
-      <TodoItem key={item.id} todoItem={item.name} todoItems={todoItems} todoDate={item.todoDate} id={item.id}/>
+      <TodoItem key={item.id} todoItem={item.name} todoItems={todoItems} todoDate={item.todoDate} id={item.id} />
       
     )}
 

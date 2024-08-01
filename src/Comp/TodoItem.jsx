@@ -2,12 +2,12 @@ import { useContext, useRef, useState } from "react";
 import styles from "./TodoItem.module.css";
 import { TodoStore } from "../store/TodoStore";
 import { MdDelete } from "react-icons/md";
+import Checkbox from "./Checkbox";
 
 function TodoItem({ todoItem, todoDate ,id}) {
 const {editItem}=useContext(TodoStore);
   const [edit, setEdit] = useState(false);
   const [TodoName, setTodoName] = useState(todoItem);
-  const [done, setDone] = useState(false);
   const { DeleteItem } = useContext(TodoStore);
   const inputRef = useRef();
   function handleEdit() {
@@ -17,46 +17,41 @@ const {editItem}=useContext(TodoStore);
     inputRef.current = e.target.value;
   }
   function handleSave() {
-    setTodoName(inputRef.current);
+  
+    if(inputRef.current.length>0){
+         setTodoName(inputRef.current);
     editItem(inputRef.current,todoItem,todoDate,id)
+    }
     setEdit(false);
   }
   return (
     <>
-      <div key={todoItem} className="items-container ">
+      <div key={id} className="items-container ">
         <div className={`${styles.row} row`}>
-          
-          <div className={`${styles.col} col-3`}>{TodoName}</div>
+          <div className={`${styles.col} col-4`} > 
+          <Checkbox name={TodoName} date={todoDate} id={id}/>
+            </div>
           <div className={`${styles.col} col-2`}>{todoDate}</div>
           <button
-            className={`${styles.add}  btn btn-dark`}
+            className={`${styles.add}  btn btn-summary`}
             onClick={handleEdit}
           >
             🛠️
-          </button>
-          <button
-            className={` ${styles.add} btn ${done?"btn-success":"btn-danger"}`}
-            onClick={() => {
-              setDone(!done);
-            }}
-          >
-            {done ? "Done" : "Pending"}
           </button>
           <button className={` ${styles.add} btn btn-danger`}
               type="button"
 
               onClick={() => DeleteItem(id)}
-            >{"Delete"}
+            >
               <MdDelete />
             </button>
-          
           <div
             className={`${styles.col} col-2`}
             style={edit ? { display:"flex" } : { display: "none" }}
           >
-            <input type="text" onChange={handleChange} ref={inputRef} placeholder="edit task"></input>
-            <button className="btn btn-success edit" onClick={handleSave}>
-              save
+            <input type="text" onChange={handleChange} ref={inputRef} placeholder="edit task" required />
+            <button className="btn btn-success edit" onClick={handleSave} >
+              Save
             </button>
           </div>
         </div>

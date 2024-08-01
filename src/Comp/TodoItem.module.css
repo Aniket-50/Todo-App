@@ -1,20 +1,29 @@
 .col{
-  padding:  10px 10px;
-  color: #000;
+  position: relative;
 
+  margin-left:110px ;
+  color: #000;
   font-size: 120%;
-  font-family:Arial, Helvetica, sans-serif
+  font-family: Arial, Helvetica, sans-serif;
+ 
+  align-content: flex-start;
 }
 .add{
   text-align: center;
   margin: 2px;
   width: auto;
 }
+
 .row{
-  background-color:dodgerblue;
-   padding-left: 10px;
-  width: 15in;
+  display: flex;
+  background-color: rgb(29, 119, 209);
+  padding-left: 10px;
+  width: 10in;
   border-radius: 30px;
-  margin-top: 5px;
+  margin-top: 15px;
   text-align: left;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+
 }
