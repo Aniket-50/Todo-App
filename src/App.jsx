@@ -2,7 +2,7 @@ import AddTodo from './Comp/AddTodo';
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css'
 import TodoItems from './Comp/TodoItems';
-import { useContext, useEffect, useReducer,useState} from 'react';
+import {useEffect, useReducer} from 'react';
 import {TodoStore} from './store/TodoStore';
 
 
