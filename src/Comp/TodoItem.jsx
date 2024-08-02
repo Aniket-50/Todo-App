@@ -5,6 +5,12 @@ import { MdDelete } from "react-icons/md";
 import Checkbox from "./Checkbox";
 
 function TodoItem({ todoItem, todoDate ,id}) {
+  const dateArr=todoDate.split("-")
+var year=dateArr[0];
+var month=dateArr[1];
+var date=dateArr[2];
+ var newDate= date +"-"+month +"-"+year
+
 const {editItem}=useContext(TodoStore);
   const [edit, setEdit] = useState(false);
   const [TodoName, setTodoName] = useState(todoItem);
@@ -31,7 +37,7 @@ const {editItem}=useContext(TodoStore);
           <div className={`${styles.col} col-4`} > 
           <Checkbox name={TodoName} date={todoDate} id={id}/>
             </div>
-          <div className={`${styles.col} col-2`}>{todoDate}</div>
+          <div className={`${styles.col} col-2`}>{newDate}</div>
           <button
             className={`${styles.add}  btn btn-summary`}
             onClick={handleEdit}
